@@ -1,6 +1,6 @@
-/** @type {import('next').NextConfig} */
+// ✅ Solución: remover output: 'export'
 const nextConfig = {
-  output: 'export',
+  // output: 'export', ← 🔥 Eliminar o comentar esta línea
   eslint: {
     ignoreDuringBuilds: true,
   },
