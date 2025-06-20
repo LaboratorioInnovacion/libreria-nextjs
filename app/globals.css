@@ -81,3 +81,49 @@
     font-family: 'Inter', sans-serif;
   }
 }
+
+/* Clases de utilidad para safe area */
+@layer utilities {
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .safe-area-inset-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  /* Mejoras para dispositivos móviles */
+  @media (max-width: 640px) {
+    .container {
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+    }
+  }
+  
+  /* Optimizaciones para pantallas pequeñas */
+  @media (max-height: 700px) {
+    .min-h-[60px] {
+      min-height: 50px;
+    }
+  }
+  
+  /* Soporte para notch en dispositivos iOS */
+  @supports (padding: max(0px)) {
+    .safe-area-inset-bottom {
+      padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+    }
+  }
+}
+
+/* Animaciones suaves para transiciones */
+@layer components {
+  .tab-transition {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Mejoras para el scroll en móviles */
+  .mobile-scroll {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+}

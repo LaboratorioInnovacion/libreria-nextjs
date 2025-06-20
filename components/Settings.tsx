@@ -54,15 +54,15 @@ export function Settings({ settings, onUpdateSettings }: SettingsProps) {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6 mobile-scroll">
       {/* Header */}
-      <div className="flex items-center space-x-3">
-        <div className="w-10 h-10 bg-gradient-to-br from-gray-500 to-gray-600 rounded-xl flex items-center justify-center">
-          <SettingsIcon className="w-6 h-6 text-white" />
+      <div className="flex items-center space-x-2 sm:space-x-3">
+        <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-gray-500 to-gray-600 rounded-xl flex items-center justify-center">
+          <SettingsIcon className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
         </div>
         <div>
-          <h2 className="text-xl font-bold text-gray-900">Configuración</h2>
-          <p className="text-sm text-gray-500">Personaliza la aplicación</p>
+          <h2 className="text-lg sm:text-xl font-bold text-gray-900">Configuración</h2>
+          <p className="text-xs sm:text-sm text-gray-500">Personaliza la aplicación</p>
         </div>
       </div>
 
@@ -70,7 +70,7 @@ export function Settings({ settings, onUpdateSettings }: SettingsProps) {
       {hasChanges && (
         <Alert className="border-blue-200 bg-blue-50">
           <Info className="w-4 h-4 text-blue-600" />
-          <AlertDescription className="text-blue-800">
+          <AlertDescription className="text-blue-800 text-sm">
             Tienes cambios sin guardar. No olvides guardar tu configuración.
           </AlertDescription>
         </Alert>
@@ -78,16 +78,16 @@ export function Settings({ settings, onUpdateSettings }: SettingsProps) {
 
       {/* Pricing Settings */}
       <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center text-lg">
-            <DollarSign className="w-5 h-5 mr-2 text-green-600" />
+        <CardHeader className="pb-3 sm:pb-4">
+          <CardTitle className="text-base sm:text-lg flex items-center">
+            <DollarSign className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-green-600" />
             Configuración de Precios
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           {/* Profit Margin */}
           <div className="space-y-2">
-            <Label htmlFor="profitMargin" className="flex items-center">
+            <Label htmlFor="profitMargin" className="flex items-center text-sm">
               <Percent className="w-4 h-4 mr-2" />
               Margen de Ganancia
             </Label>
@@ -130,7 +130,7 @@ export function Settings({ settings, onUpdateSettings }: SettingsProps) {
 
           {/* Currency */}
           <div className="space-y-2">
-            <Label htmlFor="currency">Moneda</Label>
+            <Label htmlFor="currency" className="text-sm">Moneda</Label>
             <Select
               value={localSettings.currency}
               onValueChange={(value) => handleSettingChange('currency', value)}
@@ -152,17 +152,17 @@ export function Settings({ settings, onUpdateSettings }: SettingsProps) {
 
       {/* Inventory Settings */}
       <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center text-lg">
-            <Bell className="w-5 h-5 mr-2 text-orange-600" />
+        <CardHeader className="pb-3 sm:pb-4">
+          <CardTitle className="text-base sm:text-lg flex items-center">
+            <Bell className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-orange-600" />
             Alertas de Inventario
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex items-center justify-between">
-            <div className="space-y-1">
-              <Label htmlFor="lowStockAlert">Alertas de Stock Bajo</Label>
-              <p className="text-sm text-gray-500">
+            <div className="space-y-1 flex-1 mr-4">
+              <Label htmlFor="lowStockAlert" className="text-sm">Alertas de Stock Bajo</Label>
+              <p className="text-xs sm:text-sm text-gray-500">
                 Recibe notificaciones cuando el stock de un producto esté por debajo del mínimo
               </p>
             </div>
@@ -177,9 +177,9 @@ export function Settings({ settings, onUpdateSettings }: SettingsProps) {
 
       {/* App Information */}
       <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center text-lg">
-            <Info className="w-5 h-5 mr-2 text-blue-600" />
+        <CardHeader className="pb-3 sm:pb-4">
+          <CardTitle className="text-base sm:text-lg flex items-center">
+            <Info className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-blue-600" />
             Información de la App
           </CardTitle>
         </CardHeader>
@@ -196,25 +196,25 @@ export function Settings({ settings, onUpdateSettings }: SettingsProps) {
           </div>
           <div className="text-xs text-gray-500 bg-gray-50 rounded-lg p-3">
             <p className="font-medium mb-1">LibreStock - Sistema de Gestión de Inventario</p>
-            <p>Diseñado específicamente para librerías y pequeños negocios. Todos los datos se almacenan localmente en tu dispositivo.</p>
+            <p>Diseñado específicamente para librerías y pequeños negocios. Todos los datos se almacenan en Google Sheets.</p>
           </div>
         </CardContent>
       </Card>
 
-      {/* Action Buttons */}
-      <div className="flex space-x-3 sticky bottom-20 bg-gradient-to-t from-white to-transparent pt-4">
+      {/* Action Buttons - Optimizado para móvil */}
+      <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3 sticky bottom-20 bg-gradient-to-t from-white via-white to-transparent pt-4 pb-2">
         <Button
           variant="outline"
           onClick={resetSettings}
           disabled={!hasChanges}
-          className="flex-1"
+          className="w-full sm:flex-1"
         >
           Descartar Cambios
         </Button>
         <Button
           onClick={saveSettings}
           disabled={!hasChanges}
-          className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700"
+          className="w-full sm:flex-1 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700"
         >
           <Save className="w-4 h-4 mr-2" />
           Guardar Configuración

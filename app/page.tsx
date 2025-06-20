@@ -79,35 +79,36 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
-      <div className="container mx-auto px-4 pb-20">
-        {/* Header */}
-        <div className="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-200 -mx-4 px-4 py-4 mb-6">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 pb-safe">
+      <div className="container mx-auto px-3 sm:px-4 pb-24">
+        {/* Header - Optimizado para móvil */}
+        <div className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200 -mx-3 sm:-mx-4 px-3 sm:px-4 py-3 mb-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
-                <Package className="w-6 h-6 text-white" />
+            <div className="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-1">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                <Package className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
               </div>
-              <div>
-                <h1 className="text-xl font-bold text-gray-900">LibreStock</h1>
+              <div className="min-w-0 flex-1">
+                <h1 className="text-lg sm:text-xl font-bold text-gray-900 truncate">LibreStock</h1>
                 <div className="flex items-center space-x-2">
-                  <p className="text-sm text-gray-500">Gestión de Inventario</p>
+                  <p className="text-xs sm:text-sm text-gray-500 truncate">Gestión de Inventario</p>
                   {error ? (
-                    <WifiOff className="w-4 h-4 text-red-500" />
+                    <WifiOff className="w-3 h-3 sm:w-4 sm:h-4 text-red-500 flex-shrink-0" />
                   ) : (
-                    <Wifi className="w-4 h-4 text-green-500" />
+                    <Wifi className="w-3 h-3 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
                   )}
                 </div>
               </div>
             </div>
-            <div className="flex space-x-2">
+            <div className="flex space-x-1 sm:space-x-2 flex-shrink-0">
               <Dialog open={showScanner} onOpenChange={setShowScanner}>
                 <DialogTrigger asChild>
-                  <Button size="sm" variant="outline" className="rounded-full">
+                  <Button size="sm" variant="outline" className="rounded-full p-2 sm:px-3">
                     <Scan className="w-4 h-4" />
+                    <span className="sr-only sm:not-sr-only sm:ml-1 hidden sm:inline">Escanear</span>
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-md">
+                <DialogContent className="sm:max-w-md mx-2 sm:mx-0">
                   <ProductScanner
                     onProductScanned={(barcode) => {
                       setShowScanner(false);
@@ -119,11 +120,12 @@ export default function Home() {
               </Dialog>
               <Dialog open={showAddProduct} onOpenChange={setShowAddProduct}>
                 <DialogTrigger asChild>
-                  <Button size="sm" className="rounded-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700">
+                  <Button size="sm" className="rounded-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 p-2 sm:px-3">
                     <Plus className="w-4 h-4" />
+                    <span className="sr-only sm:not-sr-only sm:ml-1 hidden sm:inline">Agregar</span>
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto">
+                <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto mx-2 sm:mx-0">
                   <ProductForm
                     onSubmit={handleAddProduct}
                     onCancel={() => setShowAddProduct(false)}
@@ -138,9 +140,9 @@ export default function Home() {
 
         {/* Connection Status */}
         {error && (
-          <Alert className="mb-6 border-red-200 bg-red-50">
+          <Alert className="mb-4 border-red-200 bg-red-50 mx-1">
             <WifiOff className="w-4 h-4 text-red-600" />
-            <AlertDescription className="text-red-800">
+            <AlertDescription className="text-red-800 text-sm">
               <strong>Error de conexión:</strong> {error}. Los datos se mostrarán cuando se restablezca la conexión.
             </AlertDescription>
           </Alert>
@@ -151,7 +153,7 @@ export default function Home() {
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-              <p className="text-gray-600">Cargando datos desde Google Sheets...</p>
+              <p className="text-gray-600 text-sm">Cargando datos desde Google Sheets...</p>
             </div>
           </div>
         )}
@@ -159,11 +161,11 @@ export default function Home() {
         {/* Main Content */}
         {!loading && (
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsContent value="dashboard" className="mt-0">
+            <TabsContent value="dashboard" className="mt-0 px-1">
               <Dashboard products={products} settings={settings} />
             </TabsContent>
             
-            <TabsContent value="products" className="mt-0">
+            <TabsContent value="products" className="mt-0 px-1">
               <ProductList
                 products={products}
                 onUpdateProduct={handleUpdateProduct}
@@ -173,38 +175,40 @@ export default function Home() {
               />
             </TabsContent>
             
-            <TabsContent value="settings" className="mt-0">
+            <TabsContent value="settings" className="mt-0 px-1">
               <Settings
                 settings={settings}
                 onUpdateSettings={setSettings}
               />
             </TabsContent>
 
-            {/* Bottom Navigation */}
-            <div className="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md border-t border-slate-200 z-50">
-              <TabsList className="grid w-full grid-cols-3 bg-transparent p-2">
-                <TabsTrigger
-                  value="dashboard"
-                  className="flex flex-col items-center space-y-1 py-3 rounded-xl data-[state=active]:bg-blue-50 data-[state=active]:text-blue-600"
-                >
-                  <BarChart3 className="w-5 h-5" />
-                  <span className="text-xs font-medium">Dashboard</span>
-                </TabsTrigger>
-                <TabsTrigger
-                  value="products"
-                  className="flex flex-col items-center space-y-1 py-3 rounded-xl data-[state=active]:bg-blue-50 data-[state=active]:text-blue-600"
-                >
-                  <Package className="w-5 h-5" />
-                  <span className="text-xs font-medium">Productos</span>
-                </TabsTrigger>
-                <TabsTrigger
-                  value="settings"
-                  className="flex flex-col items-center space-y-1 py-3 rounded-xl data-[state=active]:bg-blue-50 data-[state=active]:text-blue-600"
-                >
-                  <SettingsIcon className="w-5 h-5" />
-                  <span className="text-xs font-medium">Ajustes</span>
-                </TabsTrigger>
-              </TabsList>
+            {/* Bottom Navigation - Mejorado para móvil */}
+            <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200 z-50 safe-area-inset-bottom">
+              <div className="px-2 py-2 pb-safe">
+                <TabsList className="grid w-full grid-cols-3 bg-transparent p-1 h-auto">
+                  <TabsTrigger
+                    value="dashboard"
+                    className="flex flex-col items-center justify-center space-y-1 py-2 px-2 rounded-xl data-[state=active]:bg-blue-50 data-[state=active]:text-blue-600 min-h-[60px] transition-all duration-200"
+                  >
+                    <BarChart3 className="w-5 h-5 flex-shrink-0" />
+                    <span className="text-xs font-medium leading-tight">Dashboard</span>
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="products"
+                    className="flex flex-col items-center justify-center space-y-1 py-2 px-2 rounded-xl data-[state=active]:bg-blue-50 data-[state=active]:text-blue-600 min-h-[60px] transition-all duration-200"
+                  >
+                    <Package className="w-5 h-5 flex-shrink-0" />
+                    <span className="text-xs font-medium leading-tight">Productos</span>
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="settings"
+                    className="flex flex-col items-center justify-center space-y-1 py-2 px-2 rounded-xl data-[state=active]:bg-blue-50 data-[state=active]:text-blue-600 min-h-[60px] transition-all duration-200"
+                  >
+                    <SettingsIcon className="w-5 h-5 flex-shrink-0" />
+                    <span className="text-xs font-medium leading-tight">Ajustes</span>
+                  </TabsTrigger>
+                </TabsList>
+              </div>
             </div>
           </Tabs>
         )}
