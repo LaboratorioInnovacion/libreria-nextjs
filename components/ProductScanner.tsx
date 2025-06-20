@@ -69,7 +69,7 @@ export function ProductScanner({ onProductScanned, onClose }: ProductScannerProp
 
       // Configurar el lector para escanear desde el video
       const result = await codeReader.decodeFromVideoDevice(
-        undefined, // Usar dispositivo por defecto
+        null, // Usar dispositivo por defecto
         videoRef.current,
         (result, error) => {
           if (result) {
